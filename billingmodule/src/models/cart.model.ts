@@ -26,7 +26,7 @@ export class Cart extends Entity {
     required: true,
   })
   created_at: string;
-  
+
   // Define well-known properties here
 
   // Indexer property to allow additional data

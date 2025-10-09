@@ -1,7 +1,7 @@
 import {Entity, model, property} from '@loopback/repository';
 
-@model({name:'cart',settings: {strict: false}})
-export class Cart extends Entity {
+@model({name:'billing_items',settings: {strict: false}})
+export class Billingitems extends Entity {
   @property({
     type: 'number',
     id: true,
@@ -13,33 +13,45 @@ export class Cart extends Entity {
     type: 'number',
     required: true,
   })
-  buyer_id: number;
+  billing_id: number;
 
   @property({
-    type: 'string',
+    type: 'number',
     required: true,
   })
-  status: string;
+  product_id: number;
 
   @property({
-    type: 'date',
+    type: 'number',
     required: true,
   })
-  created_at: string;
-  
+  quantity: number;
+
+  @property({
+    type: 'number',
+    required: true,
+  })
+  price_each: number;
+
+  @property({
+    type: 'number',
+    required: true,
+  })
+  total_price: number;
+
   // Define well-known properties here
 
   // Indexer property to allow additional data
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [prop: string]: any;
 
-  constructor(data?: Partial<Cart>) {
+  constructor(data?: Partial<Billingitems>) {
     super(data);
   }
 }
 
-export interface CartRelations {
+export interface BillingitemsRelations {
   // describe navigational properties here
 }
 
-export type CartWithRelations = Cart & CartRelations;
+export type BillingitemsWithRelations = Billingitems & BillingitemsRelations;
