@@ -29,6 +29,8 @@ export class CartController {
     @requestBody() payload: {product_id: number; quantity: number},
   ) {
     const product = await this.productRepo.findById(payload.product_id);
+    const query = await this.cartRepo.findById(cartId);
+    if(query.status=='CHECKED_OUT') throw new HttpErrors.InternalServerError('Cart is Checkedout');
     if (!product) throw new HttpErrors.NotFound('Product not found');
     if (product.stock < payload.quantity) {
       throw new HttpErrors.BadRequest('Insufficient stock');
